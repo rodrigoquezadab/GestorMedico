@@ -1,0 +1,84 @@
+PLANIFICACIÓN DEL SISTEMA DE GESTIÓN MÉDICA (GESTOR MÉDICO)
+
+1. OBJETIVO DEL SISTEMA
+El sistema tiene como objetivo optimizar y digitalizar los procesos operativos de un centro médico de tamaño medio, permitiendo la gestión integrada de pacientes, médicos, citas, fichas clínicas y la emisión de recetas médicas a través de una interfaz moderna y fluida.
+
+2. ARQUITECTURA TÉCNICA
+- Tipo: Aplicación de Página Única (Single Page Application - SPA).
+- Tecnologías: HTML5 semántico, CSS3 vanilla (con soporte de variables personalizadas para temas claro y oscuro) y JavaScript Moderno (ES6+) sin dependencias externas pesadas.
+- Persistencia: Almacenamiento local del navegador (localStorage) para permitir el funcionamiento inmediato sin servidor, con precarga de datos semilla (mock data) para facilitar pruebas iniciales.
+- Impresión: Hojas de estilo dedicadas para impresión (@media print) para generar recetas médicas profesionales en PDF o papel.
+
+3. MÓDULOS DEL SISTEMA
+
+A. DASHBOARD DE CONTROL
+- Mostrar estadísticas rápidas del día:
+  * Total de pacientes registrados.
+  * Citas programas para el día de hoy.
+  * Porcentaje de ocupación de la agenda.
+  * Médicos disponibles.
+- Lista rápida con las próximas 5 citas programadas.
+- Acciones rápidas: "Registrar Paciente", "Nueva Cita", "Iniciar Consulta".
+
+B. GESTIÓN DE PACIENTES
+- CRUD (Crear, Leer, Actualizar, Eliminar) de registros de pacientes.
+- Atributos del Paciente:
+  * ID / Cédula / RUT (Identificador Único).
+  * Estructura de Nombre Separada: Primer Nombre, Segundo Nombre, Primer Apellido, Segundo Apellido.
+  * Fecha de Nacimiento (con cálculo dinámico de edad).
+  * Género.
+  * Contacto: Listado de Múltiples Números Telefónicos (al menos uno, posibilidad de dos o más) y Correo Electrónico.
+  * Contacto de Emergencia: Nombre simple del contacto, teléfono de contacto y nota de texto con tipo de relación/contacto.
+  * Dirección.
+  * Previsión de salud / Seguro Médico.
+  * Grupo Sanguíneo y Alergias conocidas.
+- Buscador interactivo por nombre, RUT o email.
+- Vista de Perfil Clínico: Despliegue de la historia clínica en formato de línea de tiempo descendente.
+
+C. GESTIÓN DE MÉDICOS
+- CRUD de personal médico.
+- Atributos del Médico:
+  * Cédula / RUT.
+  * Estructura de Nombre Separada: Primer Nombre, Segundo Nombre, Primer Apellido, Segundo Apellido.
+  * Especialidad (ej: Pediatría, Cardiología, Medicina General, Traumatología).
+  * Teléfono y Correo Electrónico de contacto.
+  * Horario de atención (Mañana, Tarde, Jornada Completa).
+- Filtro por especialidad médica.
+
+D. AGENDAMIENTO DE CITAS
+- Crear nuevas citas médicas asociando un paciente registrado y un médico disponible.
+- Atributos de la Cita:
+  * ID único de cita.
+  * Paciente asociado.
+  * Médico asignado.
+  * Fecha y Hora.
+  * Motivo de consulta.
+  * Estado de la cita: Pendiente, En Consulta, Completada, Cancelada.
+- Interfaz gráfica de agenda/calendario interactivo para visualizar citas por día y por semana.
+- Filtros para visualizar citas por médico o especialidad.
+
+E. FICHA CLÍNICA & CONSULTA ACTIVA
+- Panel para la atención de la cita actual:
+  * Síntomas / Anamnesis.
+  * Signos Vitales (Presión arterial, Temperatura, Frecuencia cardíaca, Peso).
+  * Diagnóstico clínico.
+  * Código de diagnóstico (simulación CIE-10).
+  * Tratamiento indicado.
+- Historial acumulado por paciente visible durante la atención de la consulta.
+
+F. EMISIÓN DE RECETAS MÉDICAS
+- Módulo integrado en la consulta clínica.
+- Generación de receta con:
+  * Logotipo e información del Centro Médico.
+  * Datos del médico (Nombre, especialidad, firma/licencia).
+  * Datos del paciente (Nombre, RUT, edad).
+  * Listado de medicamentos (Nombre, dosis, frecuencia, duración).
+  * Fecha de emisión y validez.
+- Vista de vista previa de impresión (Print Preview) limpia, ocultando barras de navegación y elementos de interfaz.
+
+4. DISEÑO Y ESTÉTICA (UI/UX)
+- Paleta de Colores (Tema Oscuro): Fondo oscuro pizarra (#0f172a), tarjetas y paneles en gris oscuro (#1e293b), acentos en turquesa (#14b8a6) y verde menta (#10b981).
+- Paleta de Colores (Tema Claro): Fondo gris claro (#f8fafc), tarjetas y paneles en blanco (#ffffff), acentos en azul corporativo (#0284c7).
+- Tipografía: Outfit o Inter desde Google Fonts.
+- Transiciones: Transiciones suaves en todos los botones e intercambios de pestañas para mejorar la sensación premium de la aplicación.
+- Formato de Fechas: Despliegue de todas las fechas mostradas en pantalla y recetas impresas en formato día, mes, año (DD/MM/YYYY) para mayor claridad clínica.

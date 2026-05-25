@@ -1,0 +1,12 @@
+{
+  "name": "gestor-medico",
+  "version": "1.0.0",
+  "description": "Plataforma de administración médica premium con HTML, CSS y JS.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y http-server -p 3000 -o"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

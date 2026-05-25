@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gestor Médico: Plataforma integral premium para la administración clínica, citas, expedientes médicos y recetas electrónicas.">
+    <title>Gestor Médico - Plataforma de Administración Clínica</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="app-sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i data-lucide="activity" class="text-primary animate-pulse"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>Gestor<span>Médico</span></h2>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li>
+                        <button class="nav-btn active" data-target="dashboard" id="nav-dashboard">
+                            <i data-lucide="layout-dashboard"></i>
+                            <span>Dashboard</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="pacientes" id="nav-pacientes">
+                            <i data-lucide="users"></i>
+                            <span>Pacientes</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="medicos" id="nav-medicos">
+                            <i data-lucide="user-cog"></i>
+                            <span>Médicos</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="centros" id="nav-centros">
+                            <i data-lucide="building-2"></i>
+                            <span>Centros Médicos</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="citas" id="nav-citas">
+                            <i data-lucide="calendar"></i>
+                            <span>Citas Médicas</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-btn" data-target="historial" id="nav-historial">
+                            <i data-lucide="folder-heart"></i>
+                            <span>Historial Clínico</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="current-user">
+                    <div class="user-avatar">
+                        <i data-lucide="user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Dr. Rodrigo</span>
+                        <span class="user-role">Administrador</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header" id="app-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="btn-sidebar-toggle" aria-label="Toggle Sidebar">
+                        <i data-lucide="menu"></i>
+                    </button>
+                    <h1 class="page-title" id="page-title-text">Dashboard</h1>
+                </div>
+                
+                <div class="header-right">
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle-btn" id="btn-theme-toggle" aria-label="Cambiar Tema">
+                        <i data-lucide="sun" class="sun-icon"></i>
+                        <i data-lucide="moon" class="moon-icon"></i>
+                    </button>
+                    
+                    <!-- Date Badge -->
+                    <div class="date-badge">
+                        <i data-lucide="clock"></i>
+                        <span id="current-date">Lunes, 25 de Mayo, 2026</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamic Content Sections -->
+            <div class="content-container">
+                
+                <!-- SECTION: DASHBOARD -->
+                <section class="content-section active" id="sec-dashboard">
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-soft-blue text-blue">
+                                <i data-lucide="users"></i>
+                            </div>
+                            <div class="stat-data">
+                                <span class="stat-label">Total Pacientes</span>
+                                <h3 class="stat-value" id="stat-total-pacientes">0</h3>
+                            </div>
+                            <div class="stat-trend text-success">
+                                <i data-lucide="trending-up"></i>
+                                <span>+12% este mes</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-soft-emerald text-emerald">
+                                <i data-lucide="calendar-check"></i>
+                            </div>
+                            <div class="stat-data">
+                                <span class="stat-label">Citas de Hoy</span>
+                                <h3 class="stat-value" id="stat-citas-hoy">0</h3>
+                            </div>
+                            <div class="stat-trend text-primary">
+                                <i data-lucide="activity"></i>
+                                <span id="stat-citas-progreso">45% completadas</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-soft-purple text-purple">
+                                <i data-lucide="user-check"></i>
+                            </div>
+                            <div class="stat-data">
+                                <span class="stat-label">Médicos Activos</span>
+                                <h3 class="stat-value" id="stat-medicos-activos">0</h3>
+                            </div>
+                            <div class="stat-trend">
+                                <span>Disponibilidad 100%</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-soft-orange text-orange">
+                                <i data-lucide="receipt"></i>
+                            </div>
+                            <div class="stat-data">
+                                <span class="stat-label">Recetas Emitidas</span>
+                                <h3 class="stat-value" id="stat-recetas-emitidas">0</h3>
+                            </div>
+                            <div class="stat-trend text-success">
+                                <i data-lucide="arrow-up-right"></i>
+                                <span>+8 hoy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Layout Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Today's Appointments -->
+                        <div class="dashboard-card col-span-2">
+                            <div class="card-header">
+                                <h3>Próximas Citas del Día</h3>
+                                <button class="btn btn-secondary btn-sm" id="btn-dashboard-ver-citas">
+                                    Ver todas
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Hora</th>
+                                                <th>Paciente</th>
+                                                <th>Médico</th>
+                                                <th>Especialidad</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbl-citas-hoy">
+                                            <!-- Dynamically populated -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions & Stats -->
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Acciones Rápidas</h3>
+                            </div>
+                            <div class="card-body quick-actions-container">
+                                <button class="quick-action-btn" id="btn-quick-paciente">
+                                    <div class="qa-icon bg-soft-blue text-blue">
+                                        <i data-lucide="user-plus"></i>
+                                    </div>
+                                    <div class="qa-info">
+                                        <h4>Nuevo Paciente</h4>
+                                        <p>Registrar expediente</p>
+                                    </div>
+                                </button>
+                                <button class="quick-action-btn" id="btn-quick-cita">
+                                    <div class="qa-icon bg-soft-emerald text-emerald">
+                                        <i data-lucide="calendar-plus"></i>
+                                    </div>
+                                    <div class="qa-info">
+                                        <h4>Agendar Cita</h4>
+                                        <p>Programar atención médica</p>
+                                    </div>
+                                </button>
+                                <button class="quick-action-btn" id="btn-quick-consulta">
+                                    <div class="qa-icon bg-soft-purple text-purple">
+                                        <i data-lucide="stethoscope"></i>
+                                    </div>
+                                    <div class="qa-info">
+                                        <h4>Iniciar Consulta</h4>
+                                        <p>Ingresar ficha clínica</p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: PACIENTES -->
+                <section class="content-section" id="sec-pacientes">
+                    <div class="section-actions">
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input type="text" id="input-search-pacientes" placeholder="Buscar paciente por nombre, RUT o email...">
+                        </div>
+                        <button class="btn btn-primary" id="btn-abrir-modal-paciente">
+                            <i data-lucide="user-plus"></i> Registrar Paciente
+                        </button>
+                    </div>
+
+                    <div class="card-container">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>RUT / ID</th>
+                                        <th>Nombre Completo</th>
+                                        <th>Edad / F. Nac.</th>
+                                        <th>Género</th>
+                                        <th>Teléfono / Email</th>
+                                        <th>Previsión</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl-pacientes">
+                                    <!-- Dynamically populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: MEDICOS -->
+                <section class="content-section" id="sec-medicos">
+                    <div class="section-actions">
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input type="text" id="input-search-medicos" placeholder="Buscar médico por nombre, especialidad...">
+                        </div>
+                        <button class="btn btn-primary" id="btn-abrir-modal-medico">
+                            <i data-lucide="user-cog"></i> Registrar Médico
+                        </button>
+                    </div>
+
+                    <div class="card-container">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>RUT / ID</th>
+                                        <th>Nombre Completo</th>
+                                        <th>Especialidad</th>
+                                        <th>Contacto</th>
+                                        <th>Horario</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl-medicos">
+                                    <!-- Dynamically populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: CENTROS MEDICOS -->
+                <section class="content-section" id="sec-centros">
+                    <div class="section-actions">
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input type="text" id="input-search-centros" placeholder="Buscar centro médico por nombre, especialidad, sucursal...">
+                        </div>
+                        <button class="btn btn-primary" id="btn-abrir-modal-centro">
+                            <i data-lucide="building-2"></i> Registrar Centro Médico
+                        </button>
+                    </div>
+
+                    <div class="centros-grid" id="grid-centros">
+                        <!-- Dynamically populated cards -->
+                    </div>
+                </section>
+
+                <!-- SECTION: CITAS -->
+                <section class="content-section" id="sec-citas">
+                    <!-- Filters and Actions at the Top -->
+                    <div class="section-actions" style="margin-bottom: 24px;">
+                        <div class="citas-filters-bar">
+                            <div class="filter-item">
+                                <label for="calendar-date-picker">Seleccionar Fecha</label>
+                                <input type="date" id="calendar-date-picker" class="form-control">
+                            </div>
+                            <div class="filter-item">
+                                <label for="filter-cita-medico">Filtrar por Médico</label>
+                                <select id="filter-cita-medico" class="form-control">
+                                    <option value="todos">Todos los Médicos</option>
+                                    <!-- Dynamically populated -->
+                                </select>
+                            </div>
+                            <div class="filter-item">
+                                <label for="filter-cita-estado">Filtrar por Estado</label>
+                                <select id="filter-cita-estado" class="form-control">
+                                    <option value="todos">Todos los Estados</option>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="En Consulta">En Consulta</option>
+                                    <option value="Completada">Completada</option>
+                                    <option value="Cancelada">Cancelada</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="btn-abrir-modal-cita" style="align-self: flex-end;">
+                            <i data-lucide="calendar-plus"></i> Agendar Nueva Cita
+                        </button>
+                    </div>
+
+                    <!-- Agenda List taking full width -->
+                    <div class="card-container">
+                        <div class="card-header">
+                            <h3 id="citas-list-title">Agenda de Citas</h3>
+                            <span class="badge" id="citas-count-badge">0 citas</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Hora</th>
+                                        <th>Paciente</th>
+                                        <th>Médico / Especialidad</th>
+                                        <th>Motivo</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl-citas-agenda">
+                                    <!-- Dynamically populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: HISTORIAL CLINICO -->
+                <section class="content-section" id="sec-historial">
+                    <div class="historial-layout" id="historial-search-view">
+                        <div class="dashboard-card w-100">
+                            <div class="card-header">
+                                <h3>Seleccionar Paciente para Consulta / Historial</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="search-box mb-4">
+                                    <i data-lucide="search"></i>
+                                    <input type="text" id="input-search-historial-pacientes" placeholder="Buscar paciente por nombre, RUT o email para iniciar consulta o ver ficha...">
+                                </div>
+                                
+                                <div class="table-responsive">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>RUT / ID</th>
+                                                <th>Nombre Completo</th>
+                                                <th>Edad / F. Nac.</th>
+                                                <th>Alergias</th>
+                                                <th>Última Consulta</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbl-historial-pacientes">
+                                            <!-- Dynamically populated -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CLINICAL FILE DETAIL VIEW (Hidden by default, shown when client selected) -->
+                    <div class="historial-detail-view hidden" id="historial-detail-view">
+                        <div class="detail-header">
+                            <button class="btn btn-secondary btn-sm" id="btn-regresar-busqueda-historial">
+                                <i data-lucide="arrow-left"></i> Volver a búsqueda
+                            </button>
+                            <h2 id="clinical-patient-name">Ficha Clínica - Juan Pérez</h2>
+                        </div>
+                        
+                        <div class="historial-grid">
+                            <!-- Left: Patient Clinic Card -->
+                            <div class="historial-sidebar-info">
+                                <div class="dashboard-card">
+                                    <div class="card-header">
+                                        <h3>Datos Clínicos</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="patient-clinic-card">
+                                            <div class="pcc-item">
+                                                <span class="pcc-label">RUT / ID:</span>
+                                                <span class="pcc-val" id="cp-rut">12.345.678-9</span>
+                                            </div>
+                                            <div class="pcc-item">
+                                                <span class="pcc-label">Edad (F.Nac):</span>
+                                                <span class="pcc-val" id="cp-edad">35 años (12/03/1991)</span>
+                                            </div>
+                                            <div class="pcc-item">
+                                                <span class="pcc-label">Previsión:</span>
+                                                <span class="pcc-val" id="cp-prevision">Fonasa</span>
+                                            </div>
+                                            <div class="pcc-item">
+                                                <span class="pcc-label">Teléfonos:</span>
+                                                <span class="pcc-val" id="cp-telefonos">Sin registrar</span>
+                                            </div>
+                                            <div class="pcc-item">
+                                                <span class="pcc-label">Grupo Sanguíneo:</span>
+                                                <span class="pcc-val badge badge-blue" id="cp-sangre">O+</span>
+                                            </div>
+                                            <div class="pcc-item">
+                                                <span class="pcc-label text-warning">Alergias:</span>
+                                                <span class="pcc-val text-warning font-semibold" id="cp-alergias">Ninguna</span>
+                                            </div>
+                                            <div class="pcc-item border-t pt-3 mt-3">
+                                                <span class="pcc-label text-emerald">Contacto de Emergencia:</span>
+                                                <div class="pcc-val font-semibold" id="cp-emergencia-nombre">María Gómez</div>
+                                                <div class="pcc-val" id="cp-emergencia-tel">+56 9 1111 2222</div>
+                                                <div class="pcc-val text-muted" id="cp-emergencia-tipo" style="font-size: 0.75rem;">Madre</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="btn btn-emerald w-100 mt-4" id="btn-iniciar-consulta-activa">
+                                            <i data-lucide="stethoscope"></i> Nueva Consulta
+                                        </button>
+                                        <button class="btn btn-secondary w-100 mt-2" id="btn-editar-paciente-desde-perfil">
+                                            <i data-lucide="edit"></i> Editar Datos
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Timeline of consultation logs -->
+                            <div class="historial-timeline-container">
+                                <div class="dashboard-card">
+                                    <div class="card-header">
+                                        <h3>Línea de Tiempo de Consultas</h3>
+                                    </div>
+                                    <div class="card-body timeline-wrapper" id="consultation-timeline">
+                                        <!-- Dynamically populated timeline events -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NEW CONSULTATION VIEW (Hidden by default, shown when consultation starts) -->
+                    <div class="consulta-activa-view hidden" id="consulta-activa-view">
+                        <div class="detail-header">
+                            <button class="btn btn-secondary btn-sm" id="btn-cancelar-consulta-activa">
+                                <i data-lucide="x"></i> Cancelar Consulta
+                            </button>
+                            <h2>Consulta Médica Activa</h2>
+                        </div>
+
+                        <div class="consulta-grid">
+                            <div class="dashboard-card col-span-2">
+                                <div class="card-header">
+                                    <h3>Registro de Atención</h3>
+                                    <span id="active-consultation-patient-badge" class="badge">Paciente: Juan Pérez</span>
+                                </div>
+                                <div class="card-body">
+                                    <form id="form-consulta-activa">
+                                        <div class="form-row">
+                                            <div class="form-group col-6">
+                                                <label for="ca-medico">Médico Tratante</label>
+                                                <select id="ca-medico" class="form-control" required>
+                                                    <!-- Dynamically populated -->
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <label for="ca-fecha">Fecha y Hora</label>
+                                                <input type="datetime-local" id="ca-fecha" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Vital Signs -->
+                                        <h4 class="form-section-title">Signos Vitales</h4>
+                                        <div class="form-row-multi">
+                                            <div class="form-group">
+                                                <label for="ca-presion">P. Arterial (mmHg)</label>
+                                                <input type="text" id="ca-presion" class="form-control" placeholder="120/80">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ca-temp">Temp (°C)</label>
+                                                <input type="number" step="0.1" id="ca-temp" class="form-control" placeholder="36.5">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ca-pulso">Frec. Cardíaca (lpm)</label>
+                                                <input type="number" id="ca-pulso" class="form-control" placeholder="72">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ca-peso">Peso (kg)</label>
+                                                <input type="number" step="0.1" id="ca-peso" class="form-control" placeholder="70">
+                                            </div>
+                                        </div>
+
+                                        <h4 class="form-section-title">Evolución Médica</h4>
+                                        <div class="form-group">
+                                            <label for="ca-anamnesis">Anamnesis / Síntomas y Motivo de Consulta</label>
+                                            <textarea id="ca-anamnesis" class="form-control" rows="3" placeholder="El paciente refiere dolor de cabeza persistente desde hace 3 días..." required></textarea>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="ca-examen">Examen Físico</label>
+                                            <textarea id="ca-examen" class="form-control" rows="2" placeholder="Paciente orientado en tiempo y espacio. Faringe congestiva..."></textarea>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-8">
+                                                <label for="ca-diagnostico">Diagnóstico Principal</label>
+                                                <input type="text" id="ca-diagnostico" class="form-control" placeholder="Faringitis aguda no especificada" required>
+                                            </div>
+                                            <div class="form-group col-4">
+                                                <label for="ca-cie10">Código CIE-10 (Simulado)</label>
+                                                <input type="text" id="ca-cie10" class="form-control" placeholder="J02.9">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="ca-indicaciones">Indicaciones Generales y Tratamiento</label>
+                                            <textarea id="ca-indicaciones" class="form-control" rows="3" placeholder="Reposo relativo por 48 horas. Abundante hidratación..." required></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Right Side: Prescription Builder inside Consulta -->
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h3>Generar Receta Médica</h3>
+                                    <div class="form-check-switch">
+                                        <input type="checkbox" id="ca-emitir-receta">
+                                        <label for="ca-emitir-receta">Emitir receta para esta consulta</label>
+                                    </div>
+                                </div>
+                                <div class="card-body hidden" id="receta-builder-panel">
+                                    <div class="prescription-form-fields">
+                                        <div class="form-group">
+                                            <label>Medicamentos Recetados</label>
+                                            <div class="medication-list" id="medication-list-items">
+                                                <!-- Dyn items with delete option -->
+                                            </div>
+                                            <button type="button" class="btn btn-secondary btn-sm w-100 mt-2" id="btn-agregar-medicamento">
+                                                <i data-lucide="plus"></i> Agregar Medicamento
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="form-group mt-3">
+                                            <label for="ca-receta-validez">Validez de la Receta (días)</label>
+                                            <input type="number" id="ca-receta-validez" class="form-control" value="30">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-footer mt-auto border-t">
+                                    <button type="button" class="btn btn-emerald w-100" id="btn-guardar-consulta">
+                                        <i data-lucide="save"></i> Finalizar Consulta y Registrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: REGISTRO/EDICIÓN PACIENTE -->
+    <div class="modal-overlay" id="modal-paciente">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modal-paciente-title">Registrar Nuevo Paciente</h3>
+                <button class="modal-close" id="btn-close-modal-paciente">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-paciente">
+                    <input type="hidden" id="form-paciente-index">
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="p-rut">RUT / ID Identificador*</label>
+                            <input type="text" id="p-rut" class="form-control" placeholder="12.345.678-K" required>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="p-primer-nombre">Primer Nombre*</label>
+                            <input type="text" id="p-primer-nombre" class="form-control" placeholder="Juan" required>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="p-segundo-nombre">Segundo Nombre</label>
+                            <input type="text" id="p-segundo-nombre" class="form-control" placeholder="Alberto">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="p-primer-apellido">Primer Apellido*</label>
+                            <input type="text" id="p-primer-apellido" class="form-control" placeholder="Pérez" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="p-segundo-apellido">Segundo Apellido</label>
+                            <input type="text" id="p-segundo-apellido" class="form-control" placeholder="Gómez">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="p-nacimiento">Fecha de Nacimiento*</label>
+                            <input type="date" id="p-nacimiento" class="form-control" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="p-genero">Género</label>
+                            <select id="p-genero" class="form-control">
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Teléfonos Múltiples -->
+                    <div class="form-group">
+                        <label>Teléfonos de Contacto (Al menos uno)*</label>
+                        <div id="p-telefonos-container" class="telefonos-dynamic-list">
+                            <!-- Cargado dinámicamente desde JS -->
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm mt-2" id="btn-p-agregar-telefono">
+                            <i data-lucide="plus"></i> Agregar otro teléfono
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="p-email">Correo Electrónico</label>
+                        <input type="email" id="p-email" class="form-control" placeholder="juan.perez@example.com">
+                    </div>
+
+                    <!-- Contacto de Emergencia -->
+                    <h4 class="form-section-title">Contacto de Emergencia</h4>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="p-emergencia-nombre">Nombre de Contacto*</label>
+                            <input type="text" id="p-emergencia-nombre" class="form-control" placeholder="María Gómez" required>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="p-emergencia-telefono">Teléfono*</label>
+                            <input type="tel" id="p-emergencia-telefono" class="form-control" placeholder="+56 9 1111 2222" required>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="p-emergencia-tipo">Relación / Tipo*</label>
+                            <input type="text" id="p-emergencia-tipo" class="form-control" placeholder="Madre, Cónyuge..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="p-direccion">Dirección</label>
+                        <input type="text" id="p-direccion" class="form-control" placeholder="Av. Providencia 1234, Santiago">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="p-prevision">Previsión / Seguro*</label>
+                            <select id="p-prevision" class="form-control" required>
+                                <option value="Fonasa">Fonasa</option>
+                                <option value="Isapre Banmédica">Isapre Banmédica</option>
+                                <option value="Isapre Colmena">Isapre Colmena</option>
+                                <option value="Isapre Consalud">Isapre Consalud</option>
+                                <option value="Isapre CruzBlanca">Isapre CruzBlanca</option>
+                                <option value="Particular">Particular</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="p-sangre">Grupo Sanguíneo</label>
+                            <select id="p-sangre" class="form-control">
+                                <option value="Desconocido">Desconocido</option>
+                                <option value="O+">O Rh+</option>
+                                <option value="O-">O Rh-</option>
+                                <option value="A+">A Rh+</option>
+                                <option value="A-">A Rh-</option>
+                                <option value="B+">B Rh+</option>
+                                <option value="B-">B Rh-</option>
+                                <option value="AB+">AB Rh+</option>
+                                <option value="AB-">AB Rh-</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="p-alergias">Alergias</label>
+                            <input type="text" id="p-alergias" class="form-control" placeholder="Polen, Penicilina, etc.">
+                        </div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar-paciente">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-guardar-paciente">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: REGISTRO/EDICIÓN MÉDICO -->
+    <div class="modal-overlay" id="modal-medico">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modal-medico-title">Registrar Nuevo Médico</h3>
+                <button class="modal-close" id="btn-close-modal-medico">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-medico">
+                    <input type="hidden" id="form-medico-index">
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="m-rut">RUT / ID Identificador</label>
+                            <input type="text" id="m-rut" class="form-control" placeholder="10.222.333-4">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="m-primer-nombre">Primer Nombre*</label>
+                            <input type="text" id="m-primer-nombre" class="form-control" placeholder="Gabriel" required>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="m-segundo-nombre">Segundo Nombre</label>
+                            <input type="text" id="m-segundo-nombre" class="form-control" placeholder="Alberto">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="m-primer-apellido">Primer Apellido</label>
+                            <input type="text" id="m-primer-apellido" class="form-control" placeholder="Silva">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="m-segundo-apellido">Segundo Apellido</label>
+                            <input type="text" id="m-segundo-apellido" class="form-control" placeholder="Muñoz">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="m-especialidad">Especialidad</label>
+                            <select id="m-especialidad" class="form-control">
+                                <option value="No especificada" selected>No especificada</option>
+                                <option value="Medicina General">Medicina General</option>
+                                <option value="Pediatría">Pediatría</option>
+                                <option value="Cardiología">Cardiología</option>
+                                <option value="Dermatología">Dermatología</option>
+                                <option value="Traumatología">Traumatología</option>
+                                <option value="Ginecología">Ginecología</option>
+                                <option value="Oftalmología">Oftalmología</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="m-horario">Horario de Atención</label>
+                            <select id="m-horario" class="form-control">
+                                <option value="No especificado" selected>No especificado</option>
+                                <option value="Mañana (08:00 - 13:00)">Mañana (08:00 - 13:00)</option>
+                                <option value="Tarde (14:00 - 19:00)">Tarde (14:00 - 19:00)</option>
+                                <option value="Jornada Completa">Jornada Completa</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="m-telefono">Teléfono</label>
+                            <input type="tel" id="m-telefono" class="form-control" placeholder="+56 9 9999 8888">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="m-email">Correo Electrónico</label>
+                            <input type="email" id="m-email" class="form-control" placeholder="doctor@centromedico.cl">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="m-direccion">Dirección Particular / de Consulta</label>
+                        <input type="text" id="m-direccion" class="form-control" placeholder="Av. Apoquindo 4500, Las Condes">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Lugares de Atención (Seleccione al menos uno)*</label>
+                        <div id="m-centros-container" class="checkbox-grid">
+                            <!-- Populated dynamically via JS: checkboxes for medical centers + Consulta Particular -->
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar-medico">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-guardar-medico">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: REGISTRO/EDICIÓN CENTRO MÉDICO -->
+    <div class="modal-overlay" id="modal-centro">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modal-centro-title">Registrar Nuevo Centro Médico</h3>
+                <button class="modal-close" id="btn-close-modal-centro">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-centro">
+                    <input type="hidden" id="form-centro-index">
+                    
+                    <div class="form-group">
+                        <label for="c-nombre">Nombre del Centro Médico*</label>
+                        <input type="text" id="c-nombre" class="form-control" placeholder="Centro Médico Vida Sana" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="c-direccion">Dirección Principal*</label>
+                        <input type="text" id="c-direccion" class="form-control" placeholder="Av. Providencia 1234, Oficina 601, Santiago" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="c-especialidades">Especialidades (separadas por comas)*</label>
+                        <input type="text" id="c-especialidades" class="form-control" placeholder="Cardiología, Pediatría, Medicina General" required>
+                    </div>
+
+                    <!-- Teléfonos Múltiples -->
+                    <div class="form-group">
+                        <label>Teléfonos de Contacto (Al menos uno)*</label>
+                        <div id="c-telefonos-container" class="telefonos-dynamic-list">
+                            <!-- Cargado dinámicamente desde JS -->
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm mt-2" id="btn-c-agregar-telefono">
+                            <i data-lucide="plus"></i> Agregar otro teléfono
+                        </button>
+                    </div>
+
+                    <!-- Sucursales Múltiples -->
+                    <div class="form-group">
+                        <label>Sucursales (Al menos una)*</label>
+                        <div id="c-sucursales-container" class="sucursales-dynamic-list">
+                            <!-- Cargado dinámicamente desde JS -->
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm mt-2" id="btn-c-agregar-sucursal">
+                            <i data-lucide="plus"></i> Agregar otra sucursal
+                        </button>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar-centro">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-guardar-centro">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: AGENDAR CITA -->
+    <div class="modal-overlay" id="modal-cita">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modal-cita-title">Agendar Nueva Cita</h3>
+                <button class="modal-close" id="btn-close-modal-cita">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-cita">
+                    <input type="hidden" id="form-cita-index">
+                    
+                    <div class="form-group">
+                        <label for="c-paciente">Seleccionar Paciente*</label>
+                        <select id="c-paciente" class="form-control" required>
+                            <!-- Dynamically populated -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="c-medico">Seleccionar Médico / Especialidad*</label>
+                        <select id="c-medico" class="form-control" required>
+                            <!-- Dynamically populated -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="c-lugar-atencion">Lugar de Atención*</label>
+                        <select id="c-lugar-atencion" class="form-control" required>
+                            <option value="" disabled selected>Seleccione primero un médico...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="c-fecha">Fecha*</label>
+                            <input type="date" id="c-fecha" class="form-control" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="c-hora">Hora de Atención*</label>
+                            <select id="c-hora" class="form-control" required>
+                                <option value="08:00">08:00 AM</option>
+                                <option value="08:30">08:30 AM</option>
+                                <option value="09:00">09:00 AM</option>
+                                <option value="09:30">09:30 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="10:30">10:30 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="11:30">11:30 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="12:30">12:30 PM</option>
+                                <option value="14:00">02:00 PM</option>
+                                <option value="14:30">02:30 PM</option>
+                                <option value="15:00">03:00 PM</option>
+                                <option value="15:30">03:30 PM</option>
+                                <option value="16:00">04:00 PM</option>
+                                <option value="16:30">04:30 PM</option>
+                                <option value="17:00">05:00 PM</option>
+                                <option value="17:30">05:30 PM</option>
+                                <option value="18:00">06:00 PM</option>
+                                <option value="18:30">06:30 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="c-motivo">Motivo de la Consulta / Síntomas*</label>
+                        <input type="text" id="c-motivo" class="form-control" placeholder="Control anual, dolor abdominal, etc." required>
+                    </div>
+
+                    <div class="form-group" id="c-estado-container" style="display:none;">
+                        <label for="c-estado">Estado de la Cita</label>
+                        <select id="c-estado" class="form-control">
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="En Consulta">En Consulta</option>
+                            <option value="Completada">Completada</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cancelar-cita">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-guardar-cita">Agendar Cita</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: RECETA MÉDICA IMPRIMIBLE -->
+    <div class="modal-overlay" id="modal-receta-impresion">
+        <div class="modal-container modal-lg">
+            <div class="modal-header hide-on-print">
+                <h3>Vista Previa de Receta</h3>
+                <div>
+                    <button class="btn btn-secondary btn-sm" id="btn-cerrar-modal-receta">
+                        <i data-lucide="x"></i> Cerrar
+                    </button>
+                    <button class="btn btn-primary btn-sm" id="btn-imprimir-receta">
+                        <i data-lucide="printer"></i> Imprimir Receta
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body printable-area">
+                <div class="prescription-print-document">
+                    <!-- Header -->
+                    <div class="print-header">
+                        <div class="print-clinic-logo">
+                            <i data-lucide="activity"></i>
+                            <div class="logo-text">
+                                <h2>Centro Médico</h2>
+                                <span>Vida Sana</span>
+                            </div>
+                        </div>
+                        <div class="print-clinic-meta">
+                            <p>Dirección: Av. Providencia 1234, Oficina 601</p>
+                            <p>Fono: +56 2 2987 6543</p>
+                            <p>Contacto: contacto@vidasana.cl</p>
+                        </div>
+                    </div>
+                    
+                    <hr class="print-divider">
+                    
+                    <h2 class="print-doc-title">RECETA MÉDICA</h2>
+                    
+                    <!-- Doctor Info -->
+                    <div class="print-info-grid">
+                        <div class="print-info-block">
+                            <h4>MÉDICO PRESCRIPTOR</h4>
+                            <p><strong>Nombre:</strong> <span id="print-doc-name">Dr. Gabriel Silva</span></p>
+                            <p><strong>Especialidad:</strong> <span id="print-doc-specialty">Cardiología</span></p>
+                        </div>
+                        <div class="print-info-block">
+                            <h4>DATOS DEL PACIENTE</h4>
+                            <p><strong>Nombre:</strong> <span id="print-pac-name">Juan Pérez Gómez</span></p>
+                            <p><strong>RUT/ID:</strong> <span id="print-pac-rut">12.345.678-9</span></p>
+                            <p><strong>Edad:</strong> <span id="print-pac-edad">35 años</span></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Prescribed Medications -->
+                    <div class="print-prescription-body">
+                        <h4>MEDICAMENTOS Y DOSIFICACIÓN</h4>
+                        <table class="print-medication-table">
+                            <thead>
+                                <tr>
+                                    <th>Medicamento / Concentración</th>
+                                    <th>Dosificación / Frecuencia / Duración</th>
+                                </tr>
+                            </thead>
+                            <tbody id="print-medication-list">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="print-instructions-section" id="print-instructions-section">
+                        <h4>INDICACIONES ADICIONALES</h4>
+                        <p id="print-additional-instructions">Reposo relativo por 48 horas. Mantener hidratación abundante y control si presenta fiebre sobre 38.5°C por más de 2 días.</p>
+                    </div>
+
+                    <!-- Footer & Signatures -->
+                    <div class="print-footer">
+                        <div class="print-date">
+                            <p><strong>Fecha de Emisión:</strong> <span id="print-date-emision">25/05/2026</span></p>
+                            <p><strong>Válido por:</strong> <span id="print-date-validez">30 días</span></p>
+                        </div>
+                        <div class="print-signature-box">
+                            <div class="signature-line"></div>
+                            <p>Firma y Timbre Médico</p>
+                            <p id="print-signature-doc-name">Dr. Gabriel Silva</p>
+                            <p id="print-signature-doc-spec">Medicina General</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
